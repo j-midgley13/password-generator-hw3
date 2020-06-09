@@ -13,40 +13,64 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
+// Function that includes the password length and criteria
+// Also included console.logs to see user choices
 function generatePassword() {
 
   var selections = "";
   var passwordLength = prompt("Choose a password length between 8-128 characters:");
-  
+
+  // Set password length
   if (passwordLength < 8 || passwordLength > 128) {
-    alert("Password must be at least 8 characters but no more than 128");
-    // how can I go back to passwordLength prompt?
+    alert("Password must be at least 8 characters but no more than 128.");
+    return generatePassword();
   }
 
+  console.log("Password length: " + passwordLength);
+
+  // Confirms uppercase
   var upperCase = confirm("Include uppercase letters in your password?");
   
   if (upperCase) {
     selections = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   }
 
+  console.log("Uppercase: " + upperCase.toString())
+
+  // Confirms lowercase
   var lowerCase = confirm("Include lowercase letters in your password?");
 
   if (lowerCase) {
     selections = "abcdefghijklmnopqrstuvwxyz"
   }
 
+  console.log("Lowercase: " + lowerCase.toString())
+
+  // Confirms numbers
   var num = confirm("Include numbers in your password?");
 
   if (num) {
     selections = "0123456789"
   }
 
+  console.log("Numbers: " + num.toString())
+
+  // Confirms special characters
   var specialChar = confirm("Include special characters in your password?")
 
   if (specialChar) {
-    selections = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+    selections = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~"
   }
 
+  console.log("Special Characters: " + specialChar.toString())
+
+  // Returns user to beginning if no character set selected
+  if ((upperCase === false) && (lowerCase === false) && (num === false) && (specialChar === false)) {
+  alert("Must include at least one character set.");
+  return generatePassword();
+  }
 }
+
+
 
 
