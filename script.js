@@ -20,9 +20,12 @@ function generatePassword() {
   var selections = "";
   var passwordLength = prompt("Choose a password length between 8-128 characters:");
 
-  // Set password length
+  // Set password length with correct parameters
   if (passwordLength < 8 || passwordLength > 128) {
     alert("Password must be at least 8 characters but no more than 128.");
+    return generatePassword();
+  } else if (isNaN(passwordLength)) {
+    alert("Password must be in numerical form.");
     return generatePassword();
   }
 
@@ -32,7 +35,7 @@ function generatePassword() {
   var upperCase = confirm("Include uppercase letters in your password?");
   
   if (upperCase) {
-    selections = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    selections += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   }
 
   console.log("Uppercase: " + upperCase.toString())
@@ -41,7 +44,7 @@ function generatePassword() {
   var lowerCase = confirm("Include lowercase letters in your password?");
 
   if (lowerCase) {
-    selections = "abcdefghijklmnopqrstuvwxyz"
+    selections += "abcdefghijklmnopqrstuvwxyz"
   }
 
   console.log("Lowercase: " + lowerCase.toString())
@@ -50,7 +53,7 @@ function generatePassword() {
   var num = confirm("Include numbers in your password?");
 
   if (num) {
-    selections = "0123456789"
+    selections += "0123456789"
   }
 
   console.log("Numbers: " + num.toString())
@@ -59,7 +62,7 @@ function generatePassword() {
   var specialChar = confirm("Include special characters in your password?")
 
   if (specialChar) {
-    selections = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~"
+    selections += "!#$%&'()*+,-./:;<=>?@[]^_`{|}~"
   }
 
   console.log("Special Characters: " + specialChar.toString())
@@ -69,8 +72,16 @@ function generatePassword() {
   alert("Must include at least one character set.");
   return generatePassword();
   }
-}
 
+  // Math using user selected length and character sets
+  var randomPassword = "";
+
+  for (let i = 0; i < passwordLength; i++) {
+    randomPassword += selections.charAt(Math.floor(Math.random() * selections.length));
+  }
+
+  return randomPassword
+}
 
 
 
