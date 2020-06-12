@@ -79,9 +79,11 @@ function generatePassword() {
   for (let i = 0; i < passwordLength; i++) {
     randomPassword += selections.charAt(Math.floor(Math.random() * selections.length));
   }
-
+  
   return randomPassword
+
 }
+
 
 
 
